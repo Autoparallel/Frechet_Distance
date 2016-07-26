@@ -65,7 +65,6 @@ def dEuclid(x1,y1,x2,y2):
     d = np.sqrt((x1-x2)**2+(y1-y2)**2)
     return d
 
-
 #Here we will take two curves, and produce the freespace plot
 def frechetFreeSpace(curveAx,curveAy,curveBx,curveBy,e): #curveA is the y values for alpha and curveB is y values for beta
     blackwhite = np.empty((n,n),int)
@@ -79,6 +78,26 @@ def frechetFreeSpace(curveAx,curveAy,curveBx,curveBy,e): #curveA is the y values
     img = plt.imshow(blackwhite,cmap='Blues',origin='lower', interpolation='hanning')
     plt.show()
 
+
+
+#Here we work on the geodesic Frechet stuff
+def lineParams(x1,y1,x2,y2):
+    global M
+    M = (y2-y1)/(x2-x1)
+    global c
+    c = M*x1 - y1
+
+def lineAt(x):
+    f = M*x + c
+    return f
+
+def dGeodesic(x1,y1,x2,y2):
+    #possibly need the curve info
+#if (point in spotlight of current point)
+    # dEuclid(p1,p2)
+#elif do more complex stuff
+
+
 ################################################################################
 #Main
 ################################################################################
@@ -90,8 +109,11 @@ betaX = getXVals(s_grid, 'b')
 alphaY = getYVals(s_grid,'a')
 betaY = getYVals(s_grid,'b')
 
-epsilon = 1.9
-frechetFreeSpace(alphaX,alphaY,alphaX,betaY,epsilon) #pass frechetFreeSpace the y values,and epsilon
+lineParams(0,0,3,2)
+print(lineAt(1))
+
+#epsilon = 1.9
+#frechetFreeSpace(alphaX,alphaY,alphaX,betaY,epsilon) #pass frechetFreeSpace the y values,and epsilon
 
 #epsilon = .50001
 #frechetFreeSpace(alphaX,alphaY,alphaX,betaY,epsilon)
